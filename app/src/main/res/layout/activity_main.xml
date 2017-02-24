@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:fontFamily="cursive"
+            android:text="@string/question"
+            android:textSize="@dimen/question_size" />
+
+        <RadioButton
+            android:id="@+id/answer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/answer1"
+            android:textSize="@dimen/answer_size" />
+
+        <RadioButton
+            android:id="@+id/answer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/answer2"
+            android:textSize="@dimen/answer_size" />
+
+        <RadioButton
+            android:id="@+id/answer3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/answer3"
+            android:textSize="@dimen/answer_size" />
+
+        <RadioButton
+            android:id="@+id/answer4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/answer4"
+            android:textSize="@dimen/answer_size" />
+
+        <CheckBox
+            android:id="@+id/answer_check1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/answer1"
+            android:textSize="@dimen/answer_size"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/answer_check2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/answer2"
+            android:textSize="@dimen/answer_size"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/answer_check3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/answer3"
+            android:textSize="@dimen/answer_size"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/answer_check4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/answer4"
+            android:textSize="@dimen/answer_size"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/activity_big_margin" />
+
+        <EditText
+            android:id="@+id/answer_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:hint="@string/edit_text" />
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/life"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:drawableTop="@drawable/ic_favorite_black_24dp"
+                android:text="@string/life" />
+
+            <Button
+                android:id="@+id/score"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:drawableTop="@drawable/ic_sentiment_very_dissatisfied_black_24dp"
+                android:text="@string/score" />
+
+            <Button
+                android:id="@+id/answer_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_visibility_black_24dp"
+                android:onClick="showAnswer"
+                android:text="@string/answer" />
+
+            <Button
+                android:id="@+id/next_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_navigate_next_black_24dp"
+                android:onClick="onNextClick"
+                android:text="@string/next" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

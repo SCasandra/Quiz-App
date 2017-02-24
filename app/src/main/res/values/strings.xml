@@ -1,0 +1,15 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="app_name">Droid Quiz</string>
+    <string name="question">Question: <xliff:g example="What is Android?" id="question">%s</xliff:g></string>
+    <string name="answer1"> answer1 </string>
+    <string name="answer2"> answer2 </string>
+    <string name="answer3"> answer3 </string>
+    <string name="answer4"> answer4 </string>
+    <string name="life">lifes</string>
+    <string name="fifty">12</string>
+    <string name="answer">answer</string>
+    <string name="next">next</string>
+    <string name="edit_text">input your answer</string>
+    <string name="score">score</string>
+
+</resources>
