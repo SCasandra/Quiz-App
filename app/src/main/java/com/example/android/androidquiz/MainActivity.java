@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Question> questions = new ArrayList<>();  // All questions
-    private TextView questionTextView;                          // question to show
+    private static final int QUESTIONS = 9;
+    private List<Question> questions = new ArrayList<>();
+    private TextView questionTextView;
     private EditText answerInput;
     private Button lifeButton;
     private Button scoreButton;
@@ -36,16 +37,23 @@ public class MainActivity extends AppCompatActivity {
     private int life = 2;
     private int count = 0;                    // index of question
     private int score = 0;
+    // Constants for savedInstanceState
+    static final String SCORE = "SCORE";
+    static final String LIFE = "LIFE";
+    static final String COUNT = "COUNT";
+    static final String ANSWER = "ANSWER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
+
+        // Find the views
         questionTextView = (TextView) findViewById(R.id.question);
         lifeButton = (Button) findViewById(R.id.life);
         showAnswerButton = (Button) findViewById(R.id.answer_button);
         scoreButton = (Button) findViewById(R.id.score);
-        lifeButton.setText(life + "");
         radioButton1 = (RadioButton) findViewById(R.id.answer1);
         radioButton2 = (RadioButton) findViewById(R.id.answer2);
         radioButton3 = (RadioButton) findViewById(R.id.answer3);
@@ -56,45 +64,57 @@ public class MainActivity extends AppCompatActivity {
         checkBox4 = (CheckBox) findViewById(R.id.answer_check4);
         answerInput = (EditText) findViewById(R.id.answer_input);
         imageView = (ImageView) findViewById(R.id.imageView);
-        scoreButton.setText(score + "");
+
+        //lifeButton.setText(life + "");
+        //scoreButton.setText(score + "");
 
         if (savedInstanceState != null) {
-            score = savedInstanceState.getInt("SCORE");
+            score = savedInstanceState.getInt(SCORE);
             scoreButton.setText(score + "");
             setScoreImage();
-            life = savedInstanceState.getInt("LIFE");
+            life = savedInstanceState.getInt(LIFE);
             lifeButton.setText(life + "");
-            count = savedInstanceState.getInt("COUNT");
-            answerAccess = savedInstanceState.getBoolean("ANSWER");
+            if (life < 2) {
+                lifeButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_favorite_border_black_24dp), null, null);
+            }
+            count = savedInstanceState.getInt(COUNT);
+            answerAccess = savedInstanceState.getBoolean(ANSWER);
             if (!answerAccess) {
                 showAnswerButton.setClickable(false);
                 showAnswerButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_visibility_off_black_24dp), null, null);
             }
         }
+        // Create Questions with data from string.xml
         initializeQuestions();
+        // Show the Question on the screen
         showNewQuestion();
 
 
     }
 
-    /* This method will populate the questions list with all quiz questions */
+    /**
+     * This method will populate the questions list with all quiz questions
+     **/
     private void initializeQuestions() {
-        questions.add(new Question(Constants.question1, Constants.correctAnswers1, Constants.wrongAnswers1));
-        questions.add(new Question(Constants.question2, Constants.correctAnswers2, Constants.wrongAnswers2));
-        questions.add(new Question(Constants.question3, Constants.correctAnswers3, null));
-        questions.add(new Question(Constants.question4, Constants.correctAnswers4, null));
-        questions.add(new Question(Constants.question5, Constants.correctAnswers5, Constants.wrongAnswers5));
-        questions.add(new Question(Constants.question6, Constants.correctAnswers6, Constants.wrongAnswers6));
-        questions.add(new Question(Constants.question7, Constants.correctAnswers7, Constants.wrongAnswers7));
-        questions.add(new Question(Constants.question8, Constants.correctAnswers8, Constants.wrongAnswers8));
-        questions.add(new Question(Constants.question9, Constants.correctAnswers9, Constants.wrongAnswers9));
+        for (int i = 0; i < QUESTIONS; i++) {
+            questions.add(new Question(getString(getResources().getIdentifier("question" + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier("correctAnswers0" + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier("correctAnswers1" + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier("correctAnswers2" + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier("wrongAnswers0" + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier("wrongAnswers1" + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier("wrongAnswers2" + i, "string", getPackageName()))));
+
+        }
 
     }
 
-    /* This method will display a new question with it answers on the screen */
+    /**
+     * This method will display a new question with its answers on the screen
+     **/
     private void showNewQuestion() {
-        uncheck();
-        // if the current question has a single answer, the correct answer, use editText for answer
+        unCheck();
+        // if the current question has a single answer, the correct answer, use editText
         if (questions.get(count).getAnswers().size() == 1) {
             questionTextView.setText(questions.get(count).getQuestion());
             setVisibility(false, false);
@@ -123,8 +143,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /* This method will uncheck the boxes, preparing for next question*/
-    public void uncheck() {
+    /**
+     * This method will uncheck the boxes, preparing for next question
+     **/
+    public void unCheck() {
         radioButton1.setChecked(false);
         radioButton2.setChecked(false);
         radioButton3.setChecked(false);
@@ -136,43 +158,50 @@ public class MainActivity extends AppCompatActivity {
         answerInput.setText("");
     }
 
+    /**
+     * This method will show or hide the radio buttons
+     *
+     * @param visibility can be VISIBLE or GONE
+     */
+    public void setRadioButtonsVisibility(int visibility) {
+        radioButton1.setVisibility(visibility);
+        radioButton2.setVisibility(visibility);
+        radioButton3.setVisibility(visibility);
+        radioButton4.setVisibility(visibility);
+    }
 
-    /* This method will show/hide the views */
+    /**
+     * This method will show or hide the check boxes
+     *
+     * @param visibility can be VISIBLE or GONE
+     */
+    public void setCheckBoxVisibility(int visibility) {
+        checkBox1.setVisibility(visibility);
+        checkBox2.setVisibility(visibility);
+        checkBox3.setVisibility(visibility);
+        checkBox4.setVisibility(visibility);
+    }
+
+    /**
+     * This method control which view need to be show
+     **/
     public void setVisibility(boolean radioButtons, boolean checkBox) {
         if (radioButtons) {
-            radioButton1.setVisibility(View.VISIBLE);
-            radioButton2.setVisibility(View.VISIBLE);
-            radioButton3.setVisibility(View.VISIBLE);
-            radioButton4.setVisibility(View.VISIBLE);
-            checkBox1.setVisibility(View.GONE);
-            checkBox2.setVisibility(View.GONE);
-            checkBox3.setVisibility(View.GONE);
-            checkBox4.setVisibility(View.GONE);
-            imageView.setVisibility(View.GONE);
+            setRadioButtonsVisibility(View.VISIBLE);
+            setCheckBoxVisibility(View.GONE);
             answerInput.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
         } else {
             if (checkBox) {
-                radioButton1.setVisibility(View.GONE);
-                radioButton2.setVisibility(View.GONE);
-                radioButton3.setVisibility(View.GONE);
-                radioButton4.setVisibility(View.GONE);
-                checkBox1.setVisibility(View.VISIBLE);
-                checkBox2.setVisibility(View.VISIBLE);
-                checkBox3.setVisibility(View.VISIBLE);
-                checkBox4.setVisibility(View.VISIBLE);
-                imageView.setVisibility(View.GONE);
+                setRadioButtonsVisibility(View.GONE);
+                setCheckBoxVisibility(View.VISIBLE);
                 answerInput.setVisibility(View.GONE);
+                imageView.setVisibility(View.GONE);
             } else {
-                checkBox1.setVisibility(View.GONE);
-                checkBox2.setVisibility(View.GONE);
-                checkBox3.setVisibility(View.GONE);
-                checkBox4.setVisibility(View.GONE);
-                radioButton1.setVisibility(View.GONE);
-                radioButton2.setVisibility(View.GONE);
-                radioButton3.setVisibility(View.GONE);
-                radioButton4.setVisibility(View.GONE);
+                setRadioButtonsVisibility(View.GONE);
+                setCheckBoxVisibility(View.GONE);
                 imageView.setVisibility(View.VISIBLE);
-                // this question has an image
+                // this question has an image (all questions with single correct answer has an image)
                 int resourceId = getResources().getIdentifier("image" + count, "drawable",
                         getPackageName());
                 imageView.setImageResource(resourceId);
@@ -181,30 +210,37 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * This method  ensure that only one radio button is check at a time
+     **/
     public void onRadioButtonClicked(View view) {
         // only one radio button can be checked at a time
-        uncheck();
+        unCheck();
         ((RadioButton) view).setChecked(true);
     }
 
-    // change the score button image depending on score
+    /**
+     * This method  change the score button image depending on score
+     **/
     public void setScoreImage() {
         if (score == 2) {
-            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_sentiment_dissatisfied_black_24dp), null, null);
+            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null,
+                    getDrawable(R.drawable.ic_sentiment_dissatisfied_black_24dp), null, null);
         }
         if (score == 4) {
-            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_sentiment_neutral_black_24dp), null, null);
+            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null,
+                    getDrawable(R.drawable.ic_sentiment_neutral_black_24dp), null, null);
         }
         if (score == 6) {
-            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_sentiment_satisfied_black_24dp), null, null);
+            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null,
+                    getDrawable(R.drawable.ic_sentiment_satisfied_black_24dp), null, null);
         }
         if (score == 8) {
-            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_sentiment_very_satisfied_black_24dp), null, null);
+            scoreButton.setCompoundDrawablesWithIntrinsicBounds(null,
+                    getDrawable(R.drawable.ic_sentiment_very_satisfied_black_24dp), null, null);
 
         }
     }
-
 
     public void onCorrectAnswer() {
         Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
@@ -220,9 +256,13 @@ public class MainActivity extends AppCompatActivity {
         lifeButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_favorite_border_black_24dp), null, null);
     }
 
-
+    /**
+     * This method verify if the user answer is correct or not
+     **/
     public void onNextClick(View view) {
+        // it was an input answer?
         if (answerInput.getVisibility() == View.VISIBLE) {
+            // any answer here?
             if (answerInput.getText().length() > 0) {
                 // is the answer correct?
                 if (answerInput.getText().toString().equalsIgnoreCase(questions.get(count).getCorrectAnswers().get(0))) {
@@ -267,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            // any checked answer?
             if (choice.size() == 0) {
                 Toast.makeText(this, "Please choose an answer", Toast.LENGTH_SHORT).show();
             } else {
@@ -281,30 +322,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /* This method will return true if the user answer is the same with coreect answer */
+    /**
+     * This method will return true if the user answer is the same with correct answer
+     **/
     public static <T> boolean listEqualsNoOrder(List<T> l1, List<T> l2) {
         final Set<T> s1 = new HashSet<>(l1);
         final Set<T> s2 = new HashSet<>(l2);
         return s1.equals(s2);
     }
 
+    /**
+     * This method will show new question on the screen if player does not lose and if there is any remaining question
+     **/
     private void showNewQuestionIfNeeded() {
         if (life == 0) {
             Toast.makeText(this, "You lose! :(", Toast.LENGTH_LONG).show();
             finish();
         } else {
-            //
             if (count < questions.size() - 1) {
                 count++;
                 showNewQuestion();
             } else {                                 // no more questions
-                Toast.makeText(this, "Score = " + score + "\nWell done!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Score = " + score + "\nWell done! :)", Toast.LENGTH_LONG).show();
                 finish();
             }
         }
     }
 
-    /* This method will check the correct answers */
+    /**
+     * This method will check(type) the correct answers
+     **/
     public void showAnswer(View view) {
         if (answerAccess) {
             if (answerInput.getVisibility() == View.VISIBLE) {
@@ -340,6 +387,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             answerAccess = false;
+            // change the answer button image depending on access
             showAnswerButton.setClickable(false);
             showAnswerButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_visibility_off_black_24dp), null, null);
         }
@@ -347,11 +395,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt("SCORE", score);
-        outState.putInt("LIFE", life);
-        outState.putInt("COUNT", count);
-        outState.putBoolean("ANSWER", answerAccess);
-        uncheck();
+        outState.putInt(SCORE, score);
+        outState.putInt(LIFE, life);
+        outState.putInt(COUNT, count);
+        outState.putBoolean(ANSWER, answerAccess);
+        unCheck();
         super.onSaveInstanceState(outState);
     }
 

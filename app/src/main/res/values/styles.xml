@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,9 +9,27 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:textColorSecondary">@color/colorPrimaryText</item>
         <item name="android:colorBackground">@color/colorBackground</item>
-        <item name="android:fontFamily">cursive</item>
         <item name="colorButtonNormal">@color/colorButton</item>
+        <item name="android:fontFamily">@string/fontFamily</item>
     </style>
 
+    <style name="RadioBtn" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:onClick">onRadioButtonClicked</item>
+        <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:textSize">@dimen/answer_size</item>
+
+    </style>
+
+    <style name="CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:textSize">@dimen/answer_size</item>
+    </style>
+
+    <style name="Buttons" parent="Widget.AppCompat.Button">
+        <item name="android:padding">@dimen/activity_vertical_margin</item>
+        <item name="android:background">@color/colorBackground</item>
+    </style>
 
 </resources>

@@ -2,12 +2,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
         <TextView
@@ -15,101 +15,94 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:fontFamily="cursive"
-            android:text="@string/question"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:padding="@dimen/activity_horizontal_margin"
             android:textSize="@dimen/question_size" />
 
         <RadioButton
             android:id="@+id/answer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/big_margin"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/answer1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:textSize="@dimen/answer_size" />
 
         <RadioButton
             android:id="@+id/answer2"
+            style="@style/RadioBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/answer2"
-            android:textSize="@dimen/answer_size" />
+            android:layout_height="wrap_content" />
 
         <RadioButton
             android:id="@+id/answer3"
+            style="@style/RadioBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/answer3"
-            android:textSize="@dimen/answer_size" />
+            android:layout_height="wrap_content" />
 
         <RadioButton
             android:id="@+id/answer4"
+            style="@style/RadioBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/answer4"
-            android:textSize="@dimen/answer_size" />
+            android:layout_height="wrap_content" />
 
         <CheckBox
             android:id="@+id/answer_check1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="@string/answer1"
-            android:textSize="@dimen/answer_size"
-            android:visibility="gone" />
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/answer_size" />
 
         <CheckBox
             android:id="@+id/answer_check2"
+            style="@style/CheckBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="@string/answer2"
-            android:textSize="@dimen/answer_size"
-            android:visibility="gone" />
+            android:layout_height="wrap_content" />
 
         <CheckBox
             android:id="@+id/answer_check3"
+            style="@style/CheckBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="@string/answer3"
-            android:textSize="@dimen/answer_size"
-            android:visibility="gone" />
+            android:layout_height="wrap_content" />
 
         <CheckBox
             android:id="@+id/answer_check4"
+            style="@style/CheckBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="@string/answer4"
-            android:textSize="@dimen/answer_size"
-            android:visibility="gone" />
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_big_margin" />
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside" />
 
         <EditText
             android:id="@+id/answer_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/big_margin"
             android:hint="@string/edit_text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:orientation="horizontal">
 
             <Button
