@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources >
+<resources>
     <string name="app_name">Droid Quiz</string>
-    <string name="life">lifes</string>
+    <string name="life">life</string>
     <string name="answer">answer</string>
     <string name="next">next</string>
     <string name="edit_text">input your answer</string>

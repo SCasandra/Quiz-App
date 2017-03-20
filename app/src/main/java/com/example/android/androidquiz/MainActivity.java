@@ -1,8 +1,10 @@
 package com.example.android.androidquiz;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -114,6 +116,15 @@ public class MainActivity extends AppCompatActivity {
      **/
     private void showNewQuestion() {
         unCheck();
+        try {
+            InputMethodManager inputManager = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (Exception e) {
+
+        }
         // if the current question has a single answer, the correct answer, use editText
         if (questions.get(count).getAnswers().size() == 1) {
             questionTextView.setText(questions.get(count).getQuestion());
@@ -129,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
                 radioButton3.setText(questions.get(count).getAnswers().get(2));
                 radioButton4.setText(questions.get(count).getAnswers().get(3));
                 setVisibility(true, false);
-
             }
             // use check boxes for answers
             else {
@@ -336,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
      **/
     private void showNewQuestionIfNeeded() {
         if (life == 0) {
-            Toast.makeText(this, "You lose! :(", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "You lose! :( " + "\nScore = " + score, Toast.LENGTH_LONG).show();
             finish();
         } else {
             if (count < questions.size() - 1) {
