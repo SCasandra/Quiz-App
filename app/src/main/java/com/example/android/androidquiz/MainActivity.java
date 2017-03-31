@@ -39,11 +39,15 @@ public class MainActivity extends AppCompatActivity {
     private int life = 2;
     private int count = 0;                    // index of question
     private int score = 0;
+    private char category;
     // Constants for savedInstanceState
     static final String SCORE = "SCORE";
     static final String LIFE = "LIFE";
     static final String COUNT = "COUNT";
     static final String ANSWER = "ANSWER";
+    static final String QUESTION = "Question";
+    static final String CORRECT_ANSWERS = "CorrectAnswers";
+    static final String WRONG_ANSWERS = "WrongAnswers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
                 showAnswerButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_visibility_off_black_24dp), null, null);
             }
         }
+
+        // get the category
+        category = getIntent().getCharExtra(FirstActivity.CATEGORY, 'a');
         // Create Questions with data from string.xml
         initializeQuestions();
         // Show the Question on the screen
@@ -99,16 +106,14 @@ public class MainActivity extends AppCompatActivity {
      **/
     private void initializeQuestions() {
         for (int i = 0; i < QUESTIONS; i++) {
-            questions.add(new Question(getString(getResources().getIdentifier("question" + i, "string", getPackageName())),
-                    getString(getResources().getIdentifier("correctAnswers0" + i, "string", getPackageName())),
-                    getString(getResources().getIdentifier("correctAnswers1" + i, "string", getPackageName())),
-                    getString(getResources().getIdentifier("correctAnswers2" + i, "string", getPackageName())),
-                    getString(getResources().getIdentifier("wrongAnswers0" + i, "string", getPackageName())),
-                    getString(getResources().getIdentifier("wrongAnswers1" + i, "string", getPackageName())),
-                    getString(getResources().getIdentifier("wrongAnswers2" + i, "string", getPackageName()))));
-
+            questions.add(new Question(getString(getResources().getIdentifier(category + QUESTION + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier(category + CORRECT_ANSWERS + '0' + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier(category + CORRECT_ANSWERS + '1' + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier(category + CORRECT_ANSWERS + '2' + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier(category + WRONG_ANSWERS + '0' + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier(category + WRONG_ANSWERS + '1' + i, "string", getPackageName())),
+                    getString(getResources().getIdentifier(category + WRONG_ANSWERS + '2' + i, "string", getPackageName()))));
         }
-
     }
 
     /**
@@ -212,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                 setCheckBoxVisibility(View.GONE);
                 imageView.setVisibility(View.VISIBLE);
                 // this question has an image (all questions with single correct answer has an image)
-                int resourceId = getResources().getIdentifier("image" + count, "drawable",
+                int resourceId = getResources().getIdentifier(category + "image" + count, "drawable",
                         getPackageName());
                 imageView.setImageResource(resourceId);
                 answerInput.setVisibility(View.VISIBLE);
@@ -363,44 +368,43 @@ public class MainActivity extends AppCompatActivity {
      * This method will check(type) the correct answers
      **/
     public void showAnswer(View view) {
-        if (answerAccess) {
-            if (answerInput.getVisibility() == View.VISIBLE) {
-                answerInput.setText(questions.get(count).getCorrectAnswers().get(0));
-            } else {
-                if (radioButton1.getVisibility() == View.VISIBLE) {
-                    if (radioButton1.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
-                        radioButton1.setChecked(true);
-                    }
-                    if (radioButton1.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
-                        radioButton1.setChecked(true);
-                    }
-                    if (radioButton1.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
-                        radioButton1.setChecked(true);
-                    }
-                    if (radioButton1.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
-                        radioButton1.setChecked(true);
-                    }
+        unCheck();
+        if (answerInput.getVisibility() == View.VISIBLE) {
+            answerInput.setText(questions.get(count).getCorrectAnswers().get(0));
+        } else {
+            if (radioButton1.getVisibility() == View.VISIBLE) {
+                if (radioButton1.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
+                    radioButton1.setChecked(true);
                 }
-                if (checkBox1.getVisibility() == View.VISIBLE) {
-                    if (questions.get(count).getCorrectAnswers().contains(checkBox1.getText().toString())) {
-                        checkBox1.setChecked(true);
-                    }
-                    if (questions.get(count).getCorrectAnswers().contains(checkBox2.getText().toString())) {
-                        checkBox2.setChecked(true);
-                    }
-                    if (questions.get(count).getCorrectAnswers().contains(checkBox3.getText().toString())) {
-                        checkBox3.setChecked(true);
-                    }
-                    if (questions.get(count).getCorrectAnswers().contains(checkBox4.getText().toString())) {
-                        checkBox4.setChecked(true);
-                    }
+                if (radioButton2.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
+                    radioButton2.setChecked(true);
+                }
+                if (radioButton3.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
+                    radioButton3.setChecked(true);
+                }
+                if (radioButton4.getText().equals(questions.get(count).getCorrectAnswers().get(0))) {
+                    radioButton4.setChecked(true);
                 }
             }
-            answerAccess = false;
-            // change the answer button image depending on access
-            showAnswerButton.setClickable(false);
-            showAnswerButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_visibility_off_black_24dp), null, null);
+            if (checkBox1.getVisibility() == View.VISIBLE) {
+                if (questions.get(count).getCorrectAnswers().contains(checkBox1.getText().toString())) {
+                    checkBox1.setChecked(true);
+                }
+                if (questions.get(count).getCorrectAnswers().contains(checkBox2.getText().toString())) {
+                    checkBox2.setChecked(true);
+                }
+                if (questions.get(count).getCorrectAnswers().contains(checkBox3.getText().toString())) {
+                    checkBox3.setChecked(true);
+                }
+                if (questions.get(count).getCorrectAnswers().contains(checkBox4.getText().toString())) {
+                    checkBox4.setChecked(true);
+                }
+            }
         }
+        answerAccess = false;
+        // change the answer button image depending on access
+        showAnswerButton.setClickable(false);
+        showAnswerButton.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_visibility_off_black_24dp), null, null);
     }
 
     @Override

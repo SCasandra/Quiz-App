@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="1"
+    tools:context="com.example.android.androidquiz.FirstActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin_big"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/welcome"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/question_size" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin_big"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_big"
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_toStartOf="@+id/button2"
+        android:background="@drawable/round_button"
+        android:onClick="startAndroidQuiz"
+        android:text="@string/android" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_big"
+        android:layout_marginStart="@dimen/activity_horizontal_margin_big"
+        android:layout_toEndOf="@+id/button2"
+        android:layout_toRightOf="@+id/button2"
+        android:background="@drawable/round_button"
+        android:onClick="startArduinoQuiz"
+        android:text="@string/arduino" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/bottom_big_margin"
+        android:background="@drawable/round_button"
+        android:onClick="startGeographyQuiz"
+        android:text="@string/geography" />
+
+</RelativeLayout>

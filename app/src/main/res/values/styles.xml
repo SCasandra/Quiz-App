@@ -13,12 +13,13 @@
         <item name="android:fontFamily">@string/fontFamily</item>
     </style>
 
-    <style name="RadioBtn" parent="Widget.AppCompat.CompoundButton.RadioButton">
+    <style name="RadioBtn" parent="Base.Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:onClick">onRadioButtonClicked</item>
         <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:textSize">@dimen/answer_size</item>
-
+        <item name="colorControlNormal">@color/colorButton</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
     <style name="CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">

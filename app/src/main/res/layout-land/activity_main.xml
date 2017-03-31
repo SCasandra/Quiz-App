@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:padding="@dimen/activity_horizontal_margin_land"
+                android:padding="@dimen/activity_horizontal_margin_big"
                 android:textSize="@dimen/question_size" />
 
             <RadioButton
